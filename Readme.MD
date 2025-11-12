@@ -99,14 +99,14 @@ Trouve tous les mots uniques (sans doublons)
 Trouve le mot le plus long
 
 Exercice 9 : Reduce
-javaList<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5);
+List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5);
 
 Calcule la somme avec reduce()
 Calcule le produit avec reduce()
 Trouve le maximum avec reduce()
 
 Exercice 10 : Challenge complet
-javaclass Produit {
+class Produit {
 String nom;
 String categorie;
 double prix;

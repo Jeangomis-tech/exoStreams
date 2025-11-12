@@ -131,9 +131,52 @@ public class Main {
         long nombreMots = phrases.stream().flatMap(phrase-> Arrays.stream(phrase.split(" "))).distinct().count();
         System.out.println(" Le nombre de mots est : " +nombreMots);
 
-        Set<String> motSansDoublons = new HashSet<>();
-        motSansDoublons.addAll(phrases);
-        motSansDoublons.forEach(System.out::println);
+        List<String> motSansDoublons = phrases.stream().flatMap(phrase-> Arrays.stream(phrase.split("\\s +")))
+                .distinct()
+                .collect(Collectors.toList());
+        System.out.println(motSansDoublons);
+
+        Set<String>motUniqueSet = phrases.stream()
+                .flatMap(phrase-> Arrays.stream(phrase.split("\\s+")))
+                .collect(Collectors.toSet());
+        System.out.println(motUniqueSet);
+        //Trouve le mot le plus long
+        Optional<String> motLeplusLong = phrases.stream().flatMap(phrase->Arrays.stream(phrase.split("\\s+")))
+                .max(Comparator.comparing(String::length));
+        System.out.println("Le mot le plus long est : " + motLeplusLong.get());
+        motLeplusLong.ifPresent(System.out::println);
+
+        //
+        List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        //Calculer la somme
+        Integer somme = nombres.stream().reduce(0, Integer::sum);
+        System.out.println("La somme du tableau est: " +somme);
+        //Calculer le produit
+        int produit = nombres.stream().reduce(1,(a,b)-> a*b);
+        System.out.println("La produit du tableau est: " +produit);
+
+        //Calculer le maximum
+
+        int max = nombres.stream().reduce(0,Integer::max);
+        System.out.println("La maximum du tableau est: " +max);
+
+     //CHALLENGE COMPLET
+        List<Produit> produits = Arrays.asList(
+                new Produit("Laptop", "Electronique", 999.99, 5),
+                new Produit("Souris", "Electronique", 25.50, 15),
+                new Produit("Bureau", "Meuble", 299.00, 3),
+                new Produit("Chaise", "Meuble", 150.00, 8),
+                new Produit("Clavier", "Electronique", 75.00, 0)
+        );
+        //Affiche les produits en stock (stock > 0)
+        System.out.println("les stock supérieur à 0");
+        List<Produit> positiveStock = produits.stream()
+                .filter(p -> p.getStock() > 0)
+                .toList();
+        positiveStock.forEach(System.out::println);
+
+// ✅ AJOUTE CETTE LIGNE pour afficher :
+
 
     }
 }

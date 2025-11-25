@@ -70,7 +70,7 @@ public class Main {
         System.out.println( "L'age moyen est de " + avarageAge +" ans");
         // Trouve la personne la plus âgée
         Optional<Personne> older = personnes.stream().max(Comparator.comparingInt(Personne::getAge));
-        System.out.println("la personne la plus agée est" + older.get());
+        older.ifPresent(personne-> System.out.println("La personne la plus agée est " + personne));
 
         /**
          * Exercice 6 : FlatMap

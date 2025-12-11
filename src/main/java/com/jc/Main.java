@@ -104,6 +104,14 @@ public class Main {
         System.out.println(classeA);
         List<Etudiant>classeB = etudiants.stream().filter(etudiant->etudiant.getClasse().equals("B")).toList();
         System.out.println(classeB);
+        // Groupe les étudiants par classe 
+         Map<String, List<Etudiant>> students = etudiants.stream().collect(Collectors.groupingBy(Etudiant::getClasse));
+        
+        students.forEach((classe, studentsByClasse)->{
+          
+          System.out.println("Les etudiants de la classe: " + classe);
+          studentsByClasse.forEach(student->System.out.println("- " + student.getNom() + " " + student.getNote()));
+        });
 
         double moyenneA = classeA.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
         System.out.println( String.format("% 2f" , moyenneA));
@@ -114,7 +122,18 @@ public class Main {
             meilleurEtudiantA.ifPresent(System.out::println);
         Optional<Etudiant>meilleurEtudiantB = classeB.stream().max(Comparator.comparingDouble(Etudiant::getNote));
         meilleurEtudiantB.ifPresent(System.out::println);
-
+        //Meilleur etudiant 
+        //Trouve le meilleur étudiant de chaque classe
+        Map<String , Optional<Etudiant>> bestStudent = etudiants
+          .stream()
+          .collect(Collectors.
+          groupingBy(Etudiant::getClasse, Collectors.maxBy(Comparator.comparingDouble(Etudiant::getNote))));
+          
+      bestStudent.forEach((classe, optionalStudent)->{
+        
+        System.out.println("Le meilleur etudiant de la classe: " + classe + " est ");
+        
+        optional
         //Exercice 8 : Opérations combinées
         /**
          * Compte le nombre total de mots dans toutes les phrases

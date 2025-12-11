@@ -100,23 +100,29 @@ public class Main {
                 new Etudiant("David", "B", 16.5),
                 new Etudiant("Emma", "A", 13.5)
         );
-    List<Etudiant> classeA =etudiants.stream().filter(etudiant->etudiant.getClasse().equals("A")).toList();
-        System.out.println(classeA);
-        List<Etudiant>classeB = etudiants.stream().filter(etudiant->etudiant.getClasse().equals("B")).toList();
-        System.out.println(classeB);
+    // List<Etudiant> classeA =etudiants.stream().filter(etudiant->etudiant.getClasse().equals("A")).toList();
+    //     System.out.println(classeA);
+    //     List<Etudiant>classeB = etudiants.stream().filter(etudiant->etudiant.getClasse().equals("B")).toList();
+    //     System.out.println(classeB);
         // Groupe les étudiants par classe 
          Map<String, List<Etudiant>> students = etudiants.stream().collect(Collectors.groupingBy(Etudiant::getClasse));
-        
-        students.forEach((classe, studentsByClasse)->{
-          
+            students.forEach((classe, studentsByClasse)->{ 
           System.out.println("Les etudiants de la classe: " + classe);
           studentsByClasse.forEach(student->System.out.println("- " + student.getNom() + " " + student.getNote()));
         });
-
-        double moyenneA = classeA.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
-        System.out.println( String.format("% 2f" , moyenneA));
-        double moyenneB = classeB.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
-        System.out.println(moyenneB);
+       // 1: Moyenne par classe
+        // double moyenneA = classeA.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
+        // System.out.println( String.format("% 2f" , moyenneA));
+        // double moyenneB = classeB.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
+        // System.out.println(moyenneB);
+        // Calculer la moyenne par  classe 
+        
+       // 2: Moyenne par classe
+      Map<String, Double> averageByClasse = etudiants.stream()
+      .collect(Collectors.groupingBy(Etudiant::getClasse,Collectors.averagingDouble(Etudiant::getNote)));
+      averageByClasse.forEach((classe, average)->{
+        System.out.println("La moyenne de la classe : " + classe + " est de : " + average);
+      });
 
         Optional<Etudiant> meilleurEtudiantA = classeA.stream().max(Comparator.comparingDouble(Etudiant::getNote));
             meilleurEtudiantA.ifPresent(System.out::println);

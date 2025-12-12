@@ -206,6 +206,12 @@ public class Main {
      
      System.out.println("La valeur totale du stock est de " + valeurstock);
 
-
+//✅ Trouver les trois produits les plus cheres 
+    List<Produit> threeMoreExpensives = produits.stream()
+     .sorted(Comparator
+     .comparingDouble(Produit::getPrix).reversed()).limit(3).collect(Collectors.toList());
+     
+     threeMoreExpensives.forEach(p->System.out.println(  p.getNom() + " aux prix de : " + p.getPrix()));
+        
     }
 }

@@ -213,5 +213,10 @@ public class Main {
      
      threeMoreExpensives.forEach(p->System.out.println(  p.getNom() + " aux prix de : " + p.getPrix()));
         
+        // Explication :
+        // .sorted(...) → Trie par prix décroissant
+        // .reversed() → Inverse l'ordre (du plus cher au moins cher)
+        // .limit(3) → Prend les 3 premiers
+        // .collect(...) → Collecte dans une liste
     }
 }

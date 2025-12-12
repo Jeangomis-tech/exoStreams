@@ -218,5 +218,19 @@ public class Main {
         // .reversed() → Inverse l'ordre (du plus cher au moins cher)
         // .limit(3) → Prend les 3 premiers
         // .collect(...) → Collecte dans une liste
+
+   ✅ // Créer une Map avec la catégorie comme clé et la liste des noms de produits comme valeur
+
+         Map<String, List<String>> mesProduits = produits.stream()
+        .collect(Collectors
+        .groupingBy(Produit::getCategorie, Collectors
+        .mapping(Produit::getNom, Collectors.toList())));
+        
+        mesProduits.forEach((categorie, noms) -> {
+          
+          System.out.println(categorie + " : ");
+          
+          noms.forEach(n-> System.out.println(" - " + n));
+        });
     }
 }

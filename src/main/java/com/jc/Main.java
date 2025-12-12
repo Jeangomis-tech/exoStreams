@@ -232,5 +232,17 @@ public class Main {
           
           noms.forEach(n-> System.out.println(" - " + n));
         });
+     ✅  // Augmente le prix de tous les produits électroniques de 10%
+         List<Produit> newProduits = produits.stream()
+            .filter(p-> p.getCategorie().equals("Electronique"))
+            .map(p-> {
+              p.setPrix(p.getPrix() * 1.10);
+              
+              return p;
+            }).collect(Collectors.toList());
+            
+            System.out.println(newProduits);
+
+    }
     }
 }

@@ -16,17 +16,17 @@ public class Main {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         numbers.stream().filter(number -> number % 2 == 0).forEach(System.out::println);
-       // Affiche uniquement les nombres supérieurs à 5
+// ✅   // Affiche uniquement les nombres supérieurs à 5
         numbers.stream().filter(number -> number > 5).forEach(System.out::println);
 
-        //Exercice2:Transformation
+   //Exercice2:Transformation
 
         List<String> fruits = Arrays.asList("pomme", "banane", "orange", "kiwi");
 
-//        Convertis tous les fruits en majuscules
+// ✅        Convertis tous les fruits en majuscules
 
         fruits.stream().map(String::toUpperCase).forEach(System.out::println);
-//        Affiche la longueur de chaque fruit
+// ✅   Affiche la longueur de chaque fruit
         fruits.stream().map(String::length).forEach(System.out::println);
 
         //Exercice 3 : Comptage
@@ -41,13 +41,13 @@ public class Main {
         System.out.println(moreThenFour);
 
         //Exercice 4 : Map et Collect
-//        Crée une nouvelle liste avec les mots en majuscules
+// ✅        Crée une nouvelle liste avec les mots en majuscules
         List<String> mots = Arrays.asList("chat", "chien", "oiseau", "poisson");
         List<String>motsMajuscule = mots.stream().map(String::toUpperCase).toList();
         System.out.println(motsMajuscule);
         motsMajuscule.stream().forEach(System.out::println);
 
-//        Crée une liste contenant la première lettre de chaque mot
+// ✅        Crée une liste contenant la première lettre de chaque mot
         List<String> firstWords = mots.stream().map(mot-> String.valueOf(mot.charAt(0))).toList();
         System.out.println(firstWords);
 
@@ -110,14 +110,14 @@ public class Main {
           System.out.println("Les etudiants de la classe: " + classe);
           studentsByClasse.forEach(student->System.out.println("- " + student.getNom() + " " + student.getNote()));
         });
-       // 1: Moyenne par classe
+// ✅// 1: Moyenne par classe
         // double moyenneA = classeA.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
         // System.out.println( String.format("% 2f" , moyenneA));
         // double moyenneB = classeB.stream().collect(Collectors.averagingDouble(Etudiant::getNote));
         // System.out.println(moyenneB);
         // Calculer la moyenne par  classe 
         
-       // 2: Moyenne par classe
+// ✅ // 2: Moyenne par classe
       Map<String, Double> averageByClasse = etudiants.stream()
       .collect(Collectors.groupingBy(Etudiant::getClasse,Collectors.averagingDouble(Etudiant::getNote)));
       averageByClasse.forEach((classe, average)->{
@@ -129,7 +129,7 @@ public class Main {
         Optional<Etudiant>meilleurEtudiantB = classeB.stream().max(Comparator.comparingDouble(Etudiant::getNote));
         meilleurEtudiantB.ifPresent(System.out::println);
         //Meilleur etudiant 
-        //Trouve le meilleur étudiant de chaque classe
+// ✅  //Trouve le meilleur étudiant de chaque classe
         Map<String , Optional<Etudiant>> bestStudent = etudiants
           .stream()
           .collect(Collectors.
@@ -165,7 +165,7 @@ public class Main {
                 .flatMap(phrase-> Arrays.stream(phrase.split("\\s+")))
                 .collect(Collectors.toSet());
         System.out.println(motUniqueSet);
-        //Trouve le mot le plus long
+// ✅  //Trouve le mot le plus long
         Optional<String> motLeplusLong = phrases.stream().flatMap(phrase->Arrays.stream(phrase.split("\\s+")))
                 .max(Comparator.comparing(String::length));
         System.out.println("Le mot le plus long est : " + motLeplusLong.get());
@@ -173,19 +173,19 @@ public class Main {
 
         //
         List<Integer> nombres = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        //Calculer la somme
+// ✅ //Calculer la somme
         Integer somme = nombres.stream().reduce(0, Integer::sum);
         System.out.println("La somme du tableau est: " +somme);
         //Calculer le produit
         int produit = nombres.stream().reduce(1,(a,b)-> a*b);
         System.out.println("La produit du tableau est: " +produit);
 
-        //Calculer le maximum
+ // ✅ //Calculer le maximum
 
         int max = nombres.stream().reduce(0,Integer::max);
         System.out.println("La maximum du tableau est: " +max);
 
-     //CHALLENGE COMPLET
+// ✅ //CHALLENGE COMPLET
         List<Produit> produits = Arrays.asList(
                 new Produit("Laptop", "Electronique", 999.99, 5),
                 new Produit("Souris", "Electronique", 25.50, 15),
@@ -193,14 +193,18 @@ public class Main {
                 new Produit("Chaise", "Meuble", 150.00, 8),
                 new Produit("Clavier", "Electronique", 75.00, 0)
         );
-        //Affiche les produits en stock (stock > 0)
+ // ✅  //Affiche les produits en stock (stock > 0)
         System.out.println("les stock supérieur à 0");
         List<Produit> positiveStock = produits.stream()
                 .filter(p -> p.getStock() > 0)
                 .toList();
         positiveStock.forEach(System.out::println);
 
-// ✅ AJOUTE CETTE LIGNE pour afficher :
+// ✅  // Calculer la valeur totale du stock:
+
+        Double valeurstock = produits.stream().mapToDouble(p->p.getPrix() * p.getStock()).sum();
+     
+     System.out.println("La valeur totale du stock est de " + valeurstock);
 
 
     }
